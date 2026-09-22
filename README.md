@@ -15,7 +15,7 @@ mercadex-lddm/
 
 **Mobile:** Flutter / Dart
 
-**Banco:** PostgreSQL/PostGIS
+**Banco:** PostgreSQL
 
 **Infra:** Docker / Docker Compose
 
