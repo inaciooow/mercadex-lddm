@@ -4,7 +4,6 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
 }
 
 enum UserRole {
@@ -12,10 +11,75 @@ enum UserRole {
   ADMIN
 }
 
+enum PriceObservationStatus {
+  PENDING
+  ACTIVE
+  REJECTED
+  EXPIRED
+}
+
 model User {
-  id        String   @id @default(cuid())
-  email     String   @unique
-  role      UserRole @default(USER)
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id                String             @id @default(cuid())
+  email             String             @unique
+  role              UserRole           @default(USER)
+  priceObservations PriceObservation[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+}
+
+model Product {
+  id                String             @id @default(cuid())
+  name              String
+  brand             String
+  packaging         String
+  category          String
+  priceObservations PriceObservation[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  @@index([name])
+  @@index([category])
+}
+
+model Market {
+  id        String         @id @default(cuid())
+  name      String         @unique
+  branches  MarketBranch[]
+  createdAt DateTime       @default(now())
+  updatedAt DateTime       @updatedAt
+}
+
+model MarketBranch {
+  id                String             @id @default(cuid())
+  marketId          String
+  name              String
+  unitLabel         String
+  address           String
+  latitude          Decimal            @db.Decimal(9, 6)
+  longitude         Decimal            @db.Decimal(9, 6)
+  market            Market             @relation(fields: [marketId], references: [id], onDelete: Cascade)
+  priceObservations PriceObservation[]
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  @@index([marketId])
+}
+
+model PriceObservation {
+  id            String       @id @default(cuid())
+  productId     String
+  branchId      String
+  submittedById String?
+  price         Decimal      @db.Decimal(10, 2)
+  status        PriceObservationStatus @default(PENDING)
+  observedAt    DateTime     @default(now())
+  product       Product      @relation(fields: [productId], references: [id], onDelete: Cascade)
+  branch        MarketBranch @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  submittedBy   User?        @relation(fields: [submittedById], references: [id], onDelete: SetNull)
+  createdAt     DateTime     @default(now())
+  updatedAt     DateTime     @updatedAt
+
+  @@index([productId, observedAt])
+  @@index([branchId, observedAt])
+  @@index([submittedById])
 }
