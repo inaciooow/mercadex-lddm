@@ -1,5 +1,6 @@
 import { PrismaPg } from '@prisma/adapter-pg';
 import { PrismaClient } from '@prisma/client';
+import { hash } from 'bcryptjs';
 import { readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 
@@ -33,6 +34,18 @@ async function main() {
       create: product,
     });
   }
+
+  const passwordHash = await hash('admin', 12);
+
+  await prisma.user.upsert({
+    where: { email: 'admin@mercadex.local' },
+    update: { role: 'ADMIN', isActive: true },
+    create: {
+      email: 'admin@mercadex.local',
+      passwordHash,
+      role: 'ADMIN',
+    },
+  });
 }
 
 void main()
