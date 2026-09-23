@@ -1,0 +1,37 @@
+[
+  {
+    "id": "coke-2l",
+    "name": "Coca-Cola Original 2L",
+    "brand": "Coca-Cola",
+    "packaging": "2L",
+    "category": "Bebidas"
+  },
+  {
+    "id": "arroz-5kg",
+    "name": "Arroz Tipo 1 5kg",
+    "brand": "Camil",
+    "packaging": "5kg",
+    "category": "Mercearia"
+  },
+  {
+    "id": "feijao-1kg",
+    "name": "Feijão Carioca 1kg",
+    "brand": "Kicaldo",
+    "packaging": "1kg",
+    "category": "Mercearia"
+  },
+  {
+    "id": "cafe-500g",
+    "name": "Café Tradicional 500g",
+    "brand": "Pilão",
+    "packaging": "500g",
+    "category": "Mercearia"
+  },
+  {
+    "id": "leite-1l",
+    "name": "Leite Integral 1L",
+    "brand": "Itambé",
+    "packaging": "1L",
+    "category": "Laticínios"
+  }
+]
