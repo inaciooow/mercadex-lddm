@@ -1,22 +1,24 @@
-FROM node:22.22.3-alpine AS deps
+FROM node:24-alpine AS build
+
 WORKDIR /app
-COPY package.json package-lock.json ./
+
+COPY package*.json ./
 RUN npm ci
 
-FROM node:22.22.3-alpine AS build
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN npx prisma generate
-RUN npm run build
+RUN npx prisma generate && npm run build
 
-FROM node:22.22.3-alpine AS runner
+FROM node:24-alpine
+
 WORKDIR /app
 ENV NODE_ENV=production
-COPY package.json package-lock.json ./
-RUN npm ci --omit=dev
+
+COPY package*.json ./
+RUN npm ci --omit=dev --ignore-scripts
+
 COPY --from=build /app/dist ./dist
 COPY --from=build /app/prisma ./prisma
 COPY --from=build /app/node_modules/.prisma ./node_modules/.prisma
+
 EXPOSE 3000
-CMD ["node", "dist/main.js"]
+CMD ["node", "dist/main"]
