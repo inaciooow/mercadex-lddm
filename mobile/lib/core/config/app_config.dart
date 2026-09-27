@@ -1,5 +1,8 @@
 class AppConfig {
   const AppConfig._();
 
-  static const String appName = 'Mercadex';
+  static const useMockData = bool.fromEnvironment(
+    'USE_MOCK_DATA',
+    defaultValue: true,
+  );
 }
