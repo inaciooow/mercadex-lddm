@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/auth/data/auth_repository.dart';
 import 'package:mercadex/features/auth/presentation/auth_session_provider.dart';
 import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/widgets/app_notification.dart';
 
 class LoginScreen extends ConsumerStatefulWidget {
   const LoginScreen({super.key});
@@ -28,9 +29,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final email = _emailController.text.trim();
     final password = _passwordController.text;
     if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Informe seu e-mail e senha.')),
-      );
+      showAppNotification(context, 'Informe seu e-mail e senha.');
       return;
     }
 
@@ -49,18 +48,14 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           .read(authSessionProvider.notifier)
           .logIn(email: email, accessToken: accessToken);
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login realizado com sucesso.')),
-      );
+      showAppNotification(context, 'Login realizado com sucesso.');
       context.pop();
     } catch (_) {
       if (!mounted) {
         return;
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('E-mail ou senha inválidos.')),
-      );
+      showAppNotification(context, 'E-mail ou senha inválidos.');
     } finally {
       if (mounted) {
         setState(() => _isSubmitting = false);

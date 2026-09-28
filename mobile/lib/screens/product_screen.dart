@@ -5,6 +5,7 @@ import 'package:mercadex/features/products/data/products_repository.dart';
 import 'package:mercadex/features/products/domain/product_deals.dart';
 import 'package:mercadex/features/shopping_list/presentation/shopping_list_provider.dart';
 import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/widgets/app_notification.dart';
 import 'package:mercadex/widgets/deal_card.dart';
 
 class ProductScreen extends ConsumerStatefulWidget {
@@ -77,10 +78,9 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                         name: product.name,
                         packaging: product.packaging,
                       );
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('${product.name} adicionado à lista.'),
-                    ),
+                  showAppNotification(
+                    context,
+                    '${product.name} adicionado à lista.',
                   );
                 },
                 icon: const Icon(Icons.add_shopping_cart_outlined),
