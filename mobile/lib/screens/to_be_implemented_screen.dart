@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 
 class ToBeImplementedScreen extends StatelessWidget {
-  const ToBeImplementedScreen({super.key, this.title = 'To be implemented'});
+  const ToBeImplementedScreen({super.key, this.title = 'Em breve'});
 
   final String title;
 

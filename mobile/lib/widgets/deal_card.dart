@@ -71,7 +71,7 @@ class DealCard extends StatelessWidget {
                     Row(
                       children: [
                         Text(
-                          'R\$ $price',
+                          'R\$ ${price.replaceAll('.', ',')}',
                           style: Theme.of(context).textTheme.titleMedium
                               ?.copyWith(fontWeight: FontWeight.w800),
                         ),
@@ -79,7 +79,7 @@ class DealCard extends StatelessWidget {
                     ),
                     const SizedBox(height: 4),
                     Text(
-                      'Active deal · $packaging',
+                      'Oferta ativa · $packaging',
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ],

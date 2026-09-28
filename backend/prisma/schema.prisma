@@ -36,6 +36,7 @@ model Product {
   brand             String
   packaging         String
   category          String
+  tags              String[]           @default([])
   favorites         Favorite[]
   priceObservations PriceObservation[]
   createdAt         DateTime           @default(now())

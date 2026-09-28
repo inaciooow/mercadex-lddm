@@ -60,7 +60,7 @@ class _AdBannerState extends State<AdBanner> {
               itemBuilder: (context, index) {
                 return Container(
                   decoration: BoxDecoration(color: Colors.grey.shade300),
-                  child: Center(child: Text("ad_banner $index")),
+                  child: Center(child: Text('Anúncio ${index % _adCount + 1}')),
                 );
               },
             ),

@@ -24,7 +24,7 @@ class _TopMarketsState extends State<TopMarkets> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Top markets', style: Theme.of(context).textTheme.titleLarge),
+        Text('Supermercados em destaque', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 12),
         FutureBuilder<List<Market>>(
           future: _markets,
@@ -37,12 +37,12 @@ class _TopMarketsState extends State<TopMarkets> {
             }
 
             if (snapshot.hasError) {
-              return const Text('Could not load markets.');
+              return const Text('Não foi possível carregar os supermercados.');
             }
 
             final markets = snapshot.data ?? [];
             if (markets.isEmpty) {
-              return const Text('No markets available.');
+              return const Text('Nenhum supermercado disponível.');
             }
 
             return SingleChildScrollView(

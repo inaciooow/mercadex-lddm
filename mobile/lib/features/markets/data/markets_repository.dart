@@ -72,7 +72,7 @@ class MarketsRepository {
           MarketBranch(
             id: '${market.id}-central',
             name: '${market.name} Central',
-            address: 'Market Street',
+            address: 'Rua do Mercado',
           ),
         ],
         products: _mockProductsByMarket[marketId] ?? const [],

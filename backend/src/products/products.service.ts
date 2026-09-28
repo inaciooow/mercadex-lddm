@@ -8,13 +8,23 @@ export class ProductsService {
 
   findAll() {
     return this.prisma.product.findMany({
+      where: {
+        priceObservations: {
+          some: { status: PriceObservationStatus.ACTIVE },
+        },
+      },
       orderBy: { name: 'asc' },
     });
   }
 
   async findDeals(productId: string) {
-    const product = await this.prisma.product.findUnique({
-      where: { id: productId },
+    const product = await this.prisma.product.findFirst({
+      where: {
+        id: productId,
+        priceObservations: {
+          some: { status: PriceObservationStatus.ACTIVE },
+        },
+      },
       select: {
         id: true,
         name: true,

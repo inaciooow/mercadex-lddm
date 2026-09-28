@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class AppSearchField extends StatelessWidget {
   const AppSearchField({
     super.key,
-    this.hintText = 'Search products',
+    this.hintText = 'Buscar produtos',
     this.initialValue,
     this.onSubmitted,
   });

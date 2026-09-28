@@ -8,7 +8,7 @@ class ProductsRepository {
 
   final ProductsApi api;
 
-  static const _mockSearchProducts = [
+  static const mockSearchProducts = [
     SearchProduct(
       id: 'banana-prata-1kg',
       name: 'Banana Prata',
@@ -22,6 +22,31 @@ class ProductsRepository {
     SearchProduct(
       id: 'banana-organica-1kg',
       name: 'Banana Orgânica',
+      packaging: '1kg',
+    ),
+    SearchProduct(
+      id: 'coke-2l',
+      name: 'Coca-Cola Original 2L',
+      packaging: '2L',
+    ),
+    SearchProduct(id: 'arroz-5kg', name: 'Arroz Tipo 1', packaging: '5kg'),
+    SearchProduct(id: 'feijao-1kg', name: 'Feijão Carioca', packaging: '1kg'),
+    SearchProduct(id: 'cafe-500g', name: 'Café Tradicional', packaging: '500g'),
+    SearchProduct(id: 'leite-1l', name: 'Leite Integral', packaging: '1L'),
+    SearchProduct(
+      id: 'macarrao-500g',
+      name: 'Macarrão Espaguete',
+      packaging: '500g',
+    ),
+    SearchProduct(
+      id: 'molho-tomate-300g',
+      name: 'Molho de Tomate',
+      packaging: '300g',
+    ),
+    SearchProduct(id: 'tomate-1kg', name: 'Tomate Italiano', packaging: '1kg'),
+    SearchProduct(
+      id: 'peito-frango-1kg',
+      name: 'Peito de Frango',
       packaging: '1kg',
     ),
   ];
@@ -92,7 +117,7 @@ class ProductsRepository {
 
     final normalizedQuery = query.trim().toLowerCase();
     return Future.value(
-      _mockSearchProducts
+      mockSearchProducts
           .where(
             (product) => product.name.toLowerCase().contains(normalizedQuery),
           )
@@ -105,8 +130,31 @@ class ProductsRepository {
       return api.getProductDeals(productId);
     }
 
+    final existingProduct = _mockProducts
+        .where((product) => product.id == productId)
+        .firstOrNull;
+    if (existingProduct != null) {
+      return Future.value(existingProduct);
+    }
+
+    final product = mockSearchProducts
+        .where((product) => product.id == productId)
+        .first;
     return Future.value(
-      _mockProducts.where((product) => product.id == productId).first,
+      ProductDeals(
+        id: product.id,
+        name: product.name,
+        packaging: product.packaging,
+        deals: [
+          ProductMarketDeal(
+            id: '${product.id}-carrefour',
+            marketId: 'freshmart',
+            marketName: 'Carrefour',
+            branchName: 'Carrefour Central',
+            price: '9.99',
+          ),
+        ],
+      ),
     );
   }
 }

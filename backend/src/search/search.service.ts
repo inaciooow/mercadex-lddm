@@ -18,6 +18,7 @@ export class SearchService {
           { name: { contains: searchQuery, mode: 'insensitive' } },
           { brand: { contains: searchQuery, mode: 'insensitive' } },
           { category: { contains: searchQuery, mode: 'insensitive' } },
+          { tags: { has: searchQuery.toLowerCase() } },
         ],
         priceObservations: {
           some: { status: PriceObservationStatus.ACTIVE },

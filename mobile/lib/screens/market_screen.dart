@@ -26,7 +26,7 @@ class _MarketScreenState extends State<MarketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppTopBar(title: 'Market'),
+      appBar: const AppTopBar(title: 'Supermercado'),
       body: FutureBuilder<MarketDetail>(
         future: _market,
         builder: (context, snapshot) {
@@ -35,7 +35,7 @@ class _MarketScreenState extends State<MarketScreen> {
           }
 
           if (snapshot.hasError) {
-            return const Center(child: Text('Could not load market.'));
+            return const Center(child: Text('Não foi possível carregar o supermercado.'));
           }
 
           final market = snapshot.data!;
@@ -47,7 +47,7 @@ class _MarketScreenState extends State<MarketScreen> {
                 style: Theme.of(context).textTheme.headlineSmall,
               ),
               const SizedBox(height: 24),
-              Text('Branches', style: Theme.of(context).textTheme.titleLarge),
+              Text('Unidades', style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 12),
               ...market.branches.map(
                 (branch) => Card(
@@ -59,10 +59,10 @@ class _MarketScreenState extends State<MarketScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              Text('Products', style: Theme.of(context).textTheme.titleLarge),
+              Text('Produtos', style: Theme.of(context).textTheme.titleLarge),
               const SizedBox(height: 12),
               if (market.products.isEmpty)
-                const Text('No active products found.')
+                const Text('Nenhum produto disponível.')
               else
                 ...market.products.map(
                   (product) => Padding(

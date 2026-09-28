@@ -12,7 +12,7 @@ class ProfileScreen extends ConsumerWidget {
     final session = ref.watch(authSessionProvider);
 
     return Scaffold(
-      appBar: const AppTopBar(title: 'Profile'),
+      appBar: const AppTopBar(title: 'Perfil'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -20,7 +20,7 @@ class ProfileScreen extends ConsumerWidget {
             Card(
               child: ListTile(
                 leading: const Icon(Icons.login),
-                title: const Text('Log in'),
+                title: const Text('Entrar'),
                 trailing: const Icon(Icons.chevron_right),
                 onTap: () => context.push('/login'),
               ),
@@ -30,14 +30,14 @@ class ProfileScreen extends ConsumerWidget {
               child: ListTile(
                 leading: const Icon(Icons.person_outline),
                 title: Text(session.email),
-                subtitle: const Text('Logged in'),
+                subtitle: const Text('Conectado'),
               ),
             ),
             const SizedBox(height: 8),
             Card(
               child: ListTile(
                 leading: const Icon(Icons.logout),
-                title: const Text('Log out'),
+                title: const Text('Sair'),
                 onTap: () => ref.read(authSessionProvider.notifier).logOut(),
               ),
             ),
@@ -46,7 +46,7 @@ class ProfileScreen extends ConsumerWidget {
           Card(
             child: ListTile(
               leading: const Icon(Icons.info_outline),
-              title: const Text('About Mercadex'),
+              title: const Text('Sobre o Mercadex'),
               trailing: const Icon(Icons.chevron_right),
               onTap: () {
                 showModalBottomSheet<void>(
@@ -75,13 +75,13 @@ class AboutSheet extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              'About Mercadex',
+              'Sobre o Mercadex',
               style: Theme.of(context).textTheme.headlineSmall,
             ),
             const SizedBox(height: 12),
             const Text(
-              'Mercadex helps people discover nearby food deals shared by '
-              'their community.',
+              'O Mercadex ajuda você a encontrar ofertas de alimentos por perto, '
+              'compartilhadas pela comunidade.',
             ),
           ],
         ),

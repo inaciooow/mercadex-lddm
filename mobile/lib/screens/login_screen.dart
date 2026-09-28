@@ -29,7 +29,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
     final password = _passwordController.text;
     if (email.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Enter email and password.')),
+        const SnackBar(content: Text('Informe seu e-mail e senha.')),
       );
       return;
     }
@@ -51,7 +51,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
 
       ScaffoldMessenger.of(
         context,
-      ).showSnackBar(const SnackBar(content: Text('Logged in successfully.')));
+      ).showSnackBar(const SnackBar(content: Text('Login realizado com sucesso.')));
       context.pop();
     } catch (_) {
       if (!mounted) {
@@ -59,7 +59,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       }
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Invalid email or password.')),
+        const SnackBar(content: Text('E-mail ou senha inválidos.')),
       );
     } finally {
       if (mounted) {
@@ -71,32 +71,32 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppTopBar(title: 'Log in'),
+      appBar: const AppTopBar(title: 'Entrar'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Welcome back',
+            'Boas-vindas de volta',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
-          const Text('Log in to submit and confirm food deals.'),
+          const Text('Entre para compartilhar e confirmar ofertas de alimentos.'),
           const SizedBox(height: 24),
           TextField(
             controller: _emailController,
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(labelText: 'Email'),
+            decoration: const InputDecoration(labelText: 'E-mail'),
           ),
           const SizedBox(height: 12),
           TextField(
             controller: _passwordController,
             obscureText: true,
-            decoration: const InputDecoration(labelText: 'Password'),
+            decoration: const InputDecoration(labelText: 'Senha'),
           ),
           const SizedBox(height: 24),
           FilledButton(
             onPressed: _isSubmitting ? null : _login,
-            child: Text(_isSubmitting ? 'Logging in...' : 'Log in'),
+            child: Text(_isSubmitting ? 'Entrando...' : 'Entrar'),
           ),
         ],
       ),

@@ -1,21 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mercadex/features/home/presentation/home_products_provider.dart';
 import 'package:mercadex/features/products/data/products_repository.dart';
 import 'package:mercadex/features/products/domain/search_product.dart';
 import 'package:mercadex/widgets/app_search_field.dart';
 import 'package:mercadex/widgets/app_top_bar.dart';
 import 'package:mercadex/widgets/product_search_card.dart';
 
-class SearchResultsScreen extends StatefulWidget {
+class SearchResultsScreen extends ConsumerStatefulWidget {
   const SearchResultsScreen({super.key, required this.query});
 
   final String query;
 
   @override
-  State<SearchResultsScreen> createState() => _SearchResultsScreenState();
+  ConsumerState<SearchResultsScreen> createState() =>
+      _SearchResultsScreenState();
 }
 
-class _SearchResultsScreenState extends State<SearchResultsScreen> {
+class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
   late Future<List<SearchProduct>> _products;
 
   @override
@@ -47,7 +50,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppTopBar(title: 'Search deals'),
+      appBar: const AppTopBar(title: 'Buscar produtos'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -67,8 +70,8 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
           const SizedBox(height: 24),
           Text(
             widget.query.isEmpty
-                ? 'Search for deals'
-                : 'Deals for "${widget.query}"',
+                ? 'Pesquise um produto'
+                : 'Resultados para "${widget.query}"',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 12),
@@ -85,7 +88,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
               if (snapshot.hasError) {
                 return const Padding(
                   padding: EdgeInsets.only(top: 24),
-                  child: Center(child: Text('Could not load products.')),
+                  child: Center(child: Text('Não foi possível carregar os produtos.')),
                 );
               }
 
@@ -93,14 +96,14 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
               if (products.isEmpty) {
                 return const Padding(
                   padding: EdgeInsets.only(top: 24),
-                  child: Center(child: Text('No deals found yet.')),
+                  child: Center(child: Text('Nenhum produto encontrado.')),
                 );
               }
 
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${products.length} products found'),
+                  Text(products.length == 1 ? '1 produto encontrado' : '${products.length} produtos encontrados'),
                   const SizedBox(height: 16),
                   ...products.map(
                     (product) => Padding(
@@ -108,7 +111,12 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                       child: ProductSearchCard(
                         name: product.name,
                         packaging: product.packaging,
-                        onTap: () => context.push('/product/${product.id}'),
+                        onTap: () {
+                          ref
+                              .read(recentProductsProvider.notifier)
+                              .add(product);
+                          context.push('/product/${product.id}');
+                        },
                       ),
                     ),
                   ),

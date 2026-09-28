@@ -20,6 +20,7 @@ type ProductSeed = {
   brand: string;
   packaging: string;
   category: string;
+  tags: string[];
 };
 
 const marketSeeds = [
@@ -72,6 +73,43 @@ const marketSeeds = [
     },
   },
 ];
+
+const basePriceByProductId: Record<string, number> = {
+  'coke-2l': 8.99,
+  'agua-1-5l': 3.49,
+  'cafe-500g': 18.99,
+  'leite-1l': 5.49,
+  'iogurte-natural-170g': 3.29,
+  'manteiga-200g': 12.99,
+  'mussarela-200g': 14.99,
+  'arroz-5kg': 29.99,
+  'feijao-1kg': 8.49,
+  'macarrao-500g': 5.99,
+  'farinha-trigo-1kg': 6.29,
+  'aveia-170g': 8.99,
+  'acucar-1kg': 4.99,
+  'sal-1kg': 2.49,
+  'oleo-soja-900ml': 8.99,
+  'molho-tomate-300g': 3.49,
+  'milho-lata-170g': 4.29,
+  'ervilha-lata-170g': 4.29,
+  'atum-lata-170g': 9.99,
+  'sardinha-lata-125g': 6.99,
+  'banana-prata-1kg': 3.99,
+  'banana-nanica-1kg': 4.29,
+  'banana-organica-1kg': 5.99,
+  'maca-gala-1kg': 10.99,
+  'laranja-pera-1kg': 5.99,
+  'tomate-1kg': 8.99,
+  'batata-1kg': 5.49,
+  'cebola-1kg': 4.99,
+  'cenoura-1kg': 5.99,
+  'alface-un': 3.99,
+  'pao-forma-500g': 9.99,
+  'ovos-12un': 12.99,
+  'peito-frango-1kg': 18.99,
+  'carne-moida-1kg': 34.99,
+};
 
 const priceObservationSeeds = [
   {
@@ -154,6 +192,31 @@ async function main() {
         address: market.branch.address,
         latitude: market.branch.latitude,
         longitude: market.branch.longitude,
+      },
+    });
+  }
+
+  const branchIds = marketSeeds.map((market) => market.branch.id);
+  for (const [index, product] of products.entries()) {
+    const price = basePriceByProductId[product.id];
+    if (price == null) {
+      throw new Error(`Missing base price for ${product.id}`);
+    }
+
+    await prisma.priceObservation.upsert({
+      where: { id: `${product.id}-base-price` },
+      update: {
+        productId: product.id,
+        branchId: branchIds[index % branchIds.length],
+        price,
+        status: 'ACTIVE',
+      },
+      create: {
+        id: `${product.id}-base-price`,
+        productId: product.id,
+        branchId: branchIds[index % branchIds.length],
+        price,
+        status: 'ACTIVE',
       },
     });
   }

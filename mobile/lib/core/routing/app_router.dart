@@ -5,6 +5,7 @@ import 'package:mercadex/screens/market_screen.dart';
 import 'package:mercadex/screens/profile_screen.dart';
 import 'package:mercadex/screens/product_screen.dart';
 import 'package:mercadex/screens/search_results_screen.dart';
+import 'package:mercadex/screens/shopping_list_screen.dart';
 import 'package:mercadex/screens/to_be_implemented_screen.dart';
 import 'package:mercadex/widgets/app_bottom_navigation.dart';
 
@@ -23,6 +24,14 @@ final appRouter = GoRouter(
         StatefulShellBranch(
           routes: [
             GoRoute(
+              path: '/shopping-list',
+              builder: (context, state) => const ShoppingListScreen(),
+            ),
+          ],
+        ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
               path: '/profile',
               builder: (context, state) => const ProfileScreen(),
             ),
@@ -34,7 +43,7 @@ final appRouter = GoRouter(
     GoRoute(
       path: '/scan',
       builder: (context, state) =>
-          const ToBeImplementedScreen(title: 'Scan product'),
+          const ToBeImplementedScreen(title: 'Escanear produto'),
     ),
     GoRoute(
       path: '/market/:marketId',
