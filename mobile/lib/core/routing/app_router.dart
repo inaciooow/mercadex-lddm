@@ -1,4 +1,5 @@
 import 'package:go_router/go_router.dart';
+import 'package:mercadex/screens/comparison_screen.dart';
 import 'package:mercadex/screens/home_screen.dart';
 import 'package:mercadex/screens/login_screen.dart';
 import 'package:mercadex/screens/market_screen.dart';
@@ -7,11 +8,15 @@ import 'package:mercadex/screens/product_screen.dart';
 import 'package:mercadex/screens/search_results_screen.dart';
 import 'package:mercadex/screens/shopping_list_screen.dart';
 import 'package:mercadex/screens/submit_price_screen.dart';
-import 'package:mercadex/screens/to_be_implemented_screen.dart';
+import 'package:mercadex/screens/scanner_screen.dart';
 import 'package:mercadex/widgets/app_bottom_navigation.dart';
 
 final appRouter = GoRouter(
   routes: [
+    GoRoute(
+      path: '/compare',
+      builder: (context, state) => const ComparisonScreen(),
+    ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
         return AppBottomNavigation(navigationShell: navigationShell);
@@ -41,11 +46,7 @@ final appRouter = GoRouter(
       ],
     ),
     GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-    GoRoute(
-      path: '/scan',
-      builder: (context, state) =>
-          const ToBeImplementedScreen(title: 'Escanear produto'),
-    ),
+    GoRoute(path: '/scan', builder: (context, state) => const ScannerScreen()),
     GoRoute(
       path: '/market/:marketId',
       builder: (context, state) =>

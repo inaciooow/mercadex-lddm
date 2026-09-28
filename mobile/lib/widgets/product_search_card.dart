@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mercadex/core/theme/app_colors.dart';
+import 'package:mercadex/widgets/product_avatar.dart';
 
 class ProductSearchCard extends StatelessWidget {
   const ProductSearchCard({
@@ -15,15 +17,39 @@ class ProductSearchCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      child: ListTile(
-        leading: CircleAvatar(
-          backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-          child: const Icon(Icons.shopping_bag_outlined),
-        ),
-        title: Text(name),
-        subtitle: Text(packaging),
-        trailing: const Icon(Icons.chevron_right),
+      child: InkWell(
         onTap: onTap,
+        borderRadius: BorderRadius.circular(16),
+        child: Padding(
+          padding: const EdgeInsets.all(14),
+          child: Row(
+            children: [
+              const ProductAvatar(),
+              const SizedBox(width: 14),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: AppColors.deepGreen,
+                      ),
+                    ),
+                    const SizedBox(height: 4),
+                    Text(
+                      packaging,
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }

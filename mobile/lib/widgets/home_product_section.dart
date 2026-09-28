@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/products/domain/search_product.dart';
+import 'package:mercadex/core/theme/app_colors.dart';
+import 'package:mercadex/widgets/product_avatar.dart';
 
 class HomeProductSection extends StatelessWidget {
   const HomeProductSection({
@@ -27,6 +29,7 @@ class HomeProductSection extends StatelessWidget {
           SingleChildScrollView(
             scrollDirection: Axis.horizontal,
             child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: products.map((product) {
                 return Padding(
                   padding: const EdgeInsets.only(right: 12),
@@ -37,22 +40,21 @@ class HomeProductSection extends StatelessWidget {
                         borderRadius: BorderRadius.circular(16),
                         onTap: () => context.push('/product/${product.id}'),
                         child: Padding(
-                          padding: const EdgeInsets.all(12),
+                          padding: const EdgeInsets.all(14),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              CircleAvatar(
-                                backgroundColor: Theme.of(
-                                  context,
-                                ).colorScheme.primaryContainer,
-                                child: const Icon(Icons.shopping_bag_outlined),
-                              ),
+                              const ProductAvatar(),
                               const SizedBox(height: 16),
                               Text(
                                 product.name,
                                 maxLines: 2,
                                 overflow: TextOverflow.ellipsis,
-                                style: Theme.of(context).textTheme.titleSmall,
+                                style: Theme.of(context).textTheme.titleSmall
+                                    ?.copyWith(
+                                      color: AppColors.deepGreen,
+                                      fontWeight: FontWeight.w700,
+                                    ),
                               ),
                               const SizedBox(height: 4),
                               Text(

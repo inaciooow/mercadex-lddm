@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mercadex/core/theme/app_colors.dart';
+import 'package:mercadex/widgets/product_avatar.dart';
 
 class DealCard extends StatelessWidget {
   const DealCard({
@@ -27,16 +29,12 @@ class DealCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: BorderRadius.circular(16),
         child: Padding(
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.all(14),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              CircleAvatar(
-                radius: 24,
-                backgroundColor: Theme.of(context).colorScheme.primaryContainer,
-                child: const Icon(Icons.local_grocery_store_outlined),
-              ),
-              const SizedBox(width: 12),
+              const ProductAvatar(),
+              const SizedBox(width: 14),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -45,6 +43,7 @@ class DealCard extends StatelessWidget {
                       product,
                       style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
+                        color: AppColors.deepGreen,
                       ),
                     ),
                     const SizedBox(height: 4),
