@@ -1,12 +1,14 @@
 class ProductMarketDeal {
   const ProductMarketDeal({
     required this.id,
+    required this.marketId,
     required this.marketName,
     required this.branchName,
     required this.price,
   });
 
   final String id;
+  final String marketId;
   final String marketName;
   final String branchName;
   final String price;
@@ -17,6 +19,7 @@ class ProductMarketDeal {
 
     return ProductMarketDeal(
       id: json['id'] as String,
+      marketId: market['id'] as String,
       marketName: market['name'] as String,
       branchName: branch['name'] as String,
       price: json['price'] as String,

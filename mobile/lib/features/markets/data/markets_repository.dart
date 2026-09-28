@@ -8,11 +8,47 @@ class MarketsRepository {
   final MarketsApi api;
 
   static const _mockMarkets = [
-    Market(id: 'freshmart', name: 'FreshMart'),
-    Market(id: 'value-foods', name: 'Value Foods'),
-    Market(id: 'green-grocer', name: 'Green Grocer'),
-    Market(id: 'daily-market', name: 'Daily Market'),
+    Market(id: 'freshmart', name: 'Carrefour'),
+    Market(id: 'value-foods', name: 'Pão de Açúcar'),
+    Market(id: 'green-grocer', name: 'Assaí Atacadista'),
+    Market(id: 'daily-market', name: 'Atacadão'),
   ];
+
+  static const _mockProductsByMarket = {
+    'freshmart': [
+      MarketProduct(
+        id: 'banana-prata-1kg',
+        name: 'Banana Prata',
+        packaging: '1kg',
+      ),
+    ],
+    'value-foods': [
+      MarketProduct(
+        id: 'banana-nanica-1kg',
+        name: 'Banana Nanica',
+        packaging: '1kg',
+      ),
+      MarketProduct(
+        id: 'banana-prata-1kg',
+        name: 'Banana Prata',
+        packaging: '1kg',
+      ),
+    ],
+    'green-grocer': [
+      MarketProduct(
+        id: 'banana-organica-1kg',
+        name: 'Banana Orgânica',
+        packaging: '1kg',
+      ),
+    ],
+    'daily-market': [
+      MarketProduct(
+        id: 'banana-prata-1kg',
+        name: 'Banana Prata',
+        packaging: '1kg',
+      ),
+    ],
+  };
 
   Future<List<Market>> getMarkets() {
     if (AppConfig.useMockData) {
@@ -39,6 +75,7 @@ class MarketsRepository {
             address: 'Market Street',
           ),
         ],
+        products: _mockProductsByMarket[marketId] ?? const [],
       ),
     );
   }

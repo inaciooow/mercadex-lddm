@@ -25,10 +25,10 @@ type ProductSeed = {
 const marketSeeds = [
   {
     id: 'freshmart',
-    name: 'FreshMart',
+    name: 'Carrefour',
     branch: {
       id: 'freshmart-central',
-      name: 'FreshMart Central',
+      name: 'Carrefour Central',
       unitLabel: 'Central',
       address: '100 Market Street',
       latitude: -23.55052,
@@ -37,10 +37,10 @@ const marketSeeds = [
   },
   {
     id: 'value-foods',
-    name: 'Value Foods',
+    name: 'Pão de Açúcar',
     branch: {
       id: 'value-foods-central',
-      name: 'Value Foods Central',
+      name: 'Pão de Açúcar Central',
       unitLabel: 'Central',
       address: '200 Market Street',
       latitude: -23.55252,
@@ -49,10 +49,10 @@ const marketSeeds = [
   },
   {
     id: 'green-grocer',
-    name: 'Green Grocer',
+    name: 'Assaí Atacadista',
     branch: {
       id: 'green-grocer-central',
-      name: 'Green Grocer Central',
+      name: 'Assaí Atacadista Central',
       unitLabel: 'Central',
       address: '300 Market Street',
       latitude: -23.55452,
@@ -61,10 +61,10 @@ const marketSeeds = [
   },
   {
     id: 'daily-market',
-    name: 'Daily Market',
+    name: 'Atacadão',
     branch: {
       id: 'daily-market-central',
-      name: 'Daily Market Central',
+      name: 'Atacadão Central',
       unitLabel: 'Central',
       address: '400 Market Street',
       latitude: -23.55652,

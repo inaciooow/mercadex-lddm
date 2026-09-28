@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mercadex/features/deals/data/deals_repository.dart';
-import 'package:mercadex/features/deals/domain/search_deal.dart';
+import 'package:mercadex/features/products/data/products_repository.dart';
+import 'package:mercadex/features/products/domain/search_product.dart';
 import 'package:mercadex/widgets/app_search_field.dart';
-import 'package:mercadex/widgets/deal_card.dart';
+import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/widgets/product_search_card.dart';
 
 class SearchResultsScreen extends StatefulWidget {
   const SearchResultsScreen({super.key, required this.query});
@@ -15,12 +16,12 @@ class SearchResultsScreen extends StatefulWidget {
 }
 
 class _SearchResultsScreenState extends State<SearchResultsScreen> {
-  late Future<List<SearchDeal>> _deals;
+  late Future<List<SearchProduct>> _products;
 
   @override
   void initState() {
     super.initState();
-    _deals = _loadDeals();
+    _products = _loadProducts();
   }
 
   @override
@@ -31,22 +32,22 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
     }
 
     setState(() {
-      _deals = _loadDeals();
+      _products = _loadProducts();
     });
   }
 
-  Future<List<SearchDeal>> _loadDeals() {
+  Future<List<SearchProduct>> _loadProducts() {
     if (widget.query.trim().isEmpty) {
       return Future.value([]);
     }
 
-    return const DealsRepository().search(widget.query);
+    return const ProductsRepository().search(widget.query);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Search deals')),
+      appBar: const AppTopBar(title: 'Search deals'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
@@ -71,8 +72,8 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 12),
-          FutureBuilder<List<SearchDeal>>(
-            future: _deals,
+          FutureBuilder<List<SearchProduct>>(
+            future: _products,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Padding(
@@ -84,12 +85,12 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
               if (snapshot.hasError) {
                 return const Padding(
                   padding: EdgeInsets.only(top: 24),
-                  child: Center(child: Text('Could not load deals.')),
+                  child: Center(child: Text('Could not load products.')),
                 );
               }
 
-              final deals = snapshot.data ?? [];
-              if (deals.isEmpty) {
+              final products = snapshot.data ?? [];
+              if (products.isEmpty) {
                 return const Padding(
                   padding: EdgeInsets.only(top: 24),
                   child: Center(child: Text('No deals found yet.')),
@@ -99,27 +100,15 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('${deals.length} nearby deals'),
-                  const SizedBox(height: 12),
-                  const Wrap(
-                    spacing: 8,
-                    children: [
-                      Chip(label: Text('Nearby')),
-                      Chip(label: Text('Lowest price')),
-                      Chip(label: Text('Newest')),
-                    ],
-                  ),
+                  Text('${products.length} products found'),
                   const SizedBox(height: 16),
-                  ...deals.map(
-                    (deal) => Padding(
+                  ...products.map(
+                    (product) => Padding(
                       padding: const EdgeInsets.only(bottom: 12),
-                      child: DealCard(
-                        product: deal.productName,
-                        market: deal.marketName,
-                        branch: deal.branchName,
-                        price: deal.price,
-                        packaging: deal.packaging,
-                        onTap: () => context.push('/product/${deal.productId}'),
+                      child: ProductSearchCard(
+                        name: product.name,
+                        packaging: product.packaging,
+                        onTap: () => context.push('/product/${product.id}'),
                       ),
                     ),
                   ),

@@ -1,4 +1,5 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
+import { PriceObservationStatus } from '@prisma/client';
 import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
@@ -35,6 +36,26 @@ export class MarketsService {
       throw new NotFoundException('Market not found');
     }
 
-    return market;
+    const observations = await this.prisma.priceObservation.findMany({
+      where: {
+        status: PriceObservationStatus.ACTIVE,
+        branch: { marketId },
+      },
+      select: {
+        product: { select: { id: true, name: true, packaging: true } },
+      },
+      orderBy: { product: { name: 'asc' } },
+    });
+
+    const products = [
+      ...new Map(
+        observations.map((observation) => [
+          observation.product.id,
+          observation.product,
+        ]),
+      ).values(),
+    ];
+
+    return { ...market, products };
   }
 }

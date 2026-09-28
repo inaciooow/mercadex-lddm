@@ -9,6 +9,7 @@ class DealCard extends StatelessWidget {
     required this.price,
     required this.packaging,
     this.onTap,
+    this.onMarketTap,
   });
 
   final String product;
@@ -17,6 +18,7 @@ class DealCard extends StatelessWidget {
   final String price;
   final String packaging;
   final VoidCallback? onTap;
+  final VoidCallback? onMarketTap;
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +48,25 @@ class DealCard extends StatelessWidget {
                       ),
                     ),
                     const SizedBox(height: 4),
-                    Text('$market · $branch'),
+                    Wrap(
+                      children: [
+                        InkWell(
+                          onTap: onMarketTap,
+                          child: Text(
+                            market,
+                            style: onMarketTap == null
+                                ? null
+                                : TextStyle(
+                                    color: Theme.of(
+                                      context,
+                                    ).colorScheme.primary,
+                                    decoration: TextDecoration.underline,
+                                  ),
+                          ),
+                        ),
+                        Text(' · $branch'),
+                      ],
+                    ),
                     const SizedBox(height: 12),
                     Row(
                       children: [

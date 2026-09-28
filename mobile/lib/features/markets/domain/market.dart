@@ -29,14 +29,36 @@ class MarketBranch {
   }
 }
 
+class MarketProduct {
+  const MarketProduct({
+    required this.id,
+    required this.name,
+    required this.packaging,
+  });
+
+  final String id;
+  final String name;
+  final String packaging;
+
+  factory MarketProduct.fromJson(Map<String, dynamic> json) {
+    return MarketProduct(
+      id: json['id'] as String,
+      name: json['name'] as String,
+      packaging: json['packaging'] as String,
+    );
+  }
+}
+
 class MarketDetail extends Market {
   const MarketDetail({
     required super.id,
     required super.name,
     required this.branches,
+    required this.products,
   });
 
   final List<MarketBranch> branches;
+  final List<MarketProduct> products;
 
   factory MarketDetail.fromJson(Map<String, dynamic> json) {
     return MarketDetail(
@@ -45,6 +67,12 @@ class MarketDetail extends Market {
       branches: (json['branches'] as List<dynamic>)
           .map(
             (branch) => MarketBranch.fromJson(branch as Map<String, dynamic>),
+          )
+          .toList(),
+      products: (json['products'] as List<dynamic>)
+          .map(
+            (product) =>
+                MarketProduct.fromJson(product as Map<String, dynamic>),
           )
           .toList(),
     );

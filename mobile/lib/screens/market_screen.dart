@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/markets/data/markets_repository.dart';
 import 'package:mercadex/features/markets/domain/market.dart';
+import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/widgets/product_search_card.dart';
 
 class MarketScreen extends StatefulWidget {
   const MarketScreen({super.key, required this.marketId});
@@ -23,7 +26,7 @@ class _MarketScreenState extends State<MarketScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Market')),
+      appBar: const AppTopBar(title: 'Market'),
       body: FutureBuilder<MarketDetail>(
         future: _market,
         builder: (context, snapshot) {
@@ -55,6 +58,22 @@ class _MarketScreenState extends State<MarketScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 24),
+              Text('Products', style: Theme.of(context).textTheme.titleLarge),
+              const SizedBox(height: 12),
+              if (market.products.isEmpty)
+                const Text('No active products found.')
+              else
+                ...market.products.map(
+                  (product) => Padding(
+                    padding: const EdgeInsets.only(bottom: 12),
+                    child: ProductSearchCard(
+                      name: product.name,
+                      packaging: product.packaging,
+                      onTap: () => context.push('/product/${product.id}'),
+                    ),
+                  ),
+                ),
             ],
           );
         },

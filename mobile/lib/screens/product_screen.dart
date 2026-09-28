@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/products/data/products_repository.dart';
 import 'package:mercadex/features/products/domain/product_deals.dart';
+import 'package:mercadex/widgets/app_top_bar.dart';
 import 'package:mercadex/widgets/deal_card.dart';
 
 class ProductScreen extends StatefulWidget {
@@ -24,7 +26,7 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Product')),
+      appBar: const AppTopBar(title: 'Product'),
       body: FutureBuilder<ProductDeals>(
         future: _product,
         builder: (context, snapshot) {
@@ -61,6 +63,7 @@ class _ProductScreenState extends State<ProductScreen> {
                     branch: deal.branchName,
                     price: deal.price,
                     packaging: product.packaging,
+                    onMarketTap: () => context.push('/market/${deal.marketId}'),
                   ),
                 ),
               ),
