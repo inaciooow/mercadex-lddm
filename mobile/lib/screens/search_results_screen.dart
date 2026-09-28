@@ -88,7 +88,9 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
               if (snapshot.hasError) {
                 return const Padding(
                   padding: EdgeInsets.only(top: 24),
-                  child: Center(child: Text('Não foi possível carregar os produtos.')),
+                  child: Center(
+                    child: Text('Não foi possível carregar os produtos.'),
+                  ),
                 );
               }
 
@@ -103,7 +105,11 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(products.length == 1 ? '1 produto encontrado' : '${products.length} produtos encontrados'),
+                  Text(
+                    products.length == 1
+                        ? '1 produto encontrado'
+                        : '${products.length} produtos encontrados',
+                  ),
                   const SizedBox(height: 16),
                   ...products.map(
                     (product) => Padding(

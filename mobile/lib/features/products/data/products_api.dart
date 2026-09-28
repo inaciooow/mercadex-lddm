@@ -15,7 +15,7 @@ class ProductsApi {
     );
 
     if (response.statusCode != 200) {
-      throw StateError('Could not load products.');
+      throw StateError('Não foi possível carregar os produtos.');
     }
 
     final data = jsonDecode(response.body) as List<dynamic>;
@@ -28,7 +28,7 @@ class ProductsApi {
     final response = await client.get('/products/$productId/deals');
 
     if (response.statusCode != 200) {
-      throw StateError('Could not load product deals.');
+      throw StateError('Não foi possível carregar as ofertas do produto.');
     }
 
     return ProductDeals.fromJson(

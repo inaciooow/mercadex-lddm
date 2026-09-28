@@ -49,9 +49,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
           .read(authSessionProvider.notifier)
           .logIn(email: email, accessToken: accessToken);
 
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(const SnackBar(content: Text('Login realizado com sucesso.')));
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login realizado com sucesso.')),
+      );
       context.pop();
     } catch (_) {
       if (!mounted) {
@@ -80,7 +80,9 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
-          const Text('Entre para compartilhar e confirmar ofertas de alimentos.'),
+          const Text(
+            'Entre para compartilhar e confirmar ofertas de alimentos.',
+          ),
           const SizedBox(height: 24),
           TextField(
             controller: _emailController,

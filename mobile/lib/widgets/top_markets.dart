@@ -24,7 +24,10 @@ class _TopMarketsState extends State<TopMarkets> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Supermercados em destaque', style: Theme.of(context).textTheme.titleLarge),
+        Text(
+          'Supermercados em destaque',
+          style: Theme.of(context).textTheme.titleLarge,
+        ),
         const SizedBox(height: 12),
         FutureBuilder<List<Market>>(
           future: _markets,

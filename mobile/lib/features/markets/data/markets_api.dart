@@ -12,7 +12,7 @@ class MarketsApi {
     final response = await client.get('/markets');
 
     if (response.statusCode != 200) {
-      throw StateError('Could not load markets.');
+      throw StateError('Não foi possível carregar os supermercados.');
     }
 
     final data = jsonDecode(response.body) as List<dynamic>;
@@ -25,7 +25,7 @@ class MarketsApi {
     final response = await client.get('/markets/$marketId');
 
     if (response.statusCode != 200) {
-      throw StateError('Could not load market.');
+      throw StateError('Não foi possível carregar o supermercado.');
     }
 
     return MarketDetail.fromJson(

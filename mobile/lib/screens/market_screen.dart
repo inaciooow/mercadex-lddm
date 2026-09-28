@@ -35,7 +35,9 @@ class _MarketScreenState extends State<MarketScreen> {
           }
 
           if (snapshot.hasError) {
-            return const Center(child: Text('Não foi possível carregar o supermercado.'));
+            return const Center(
+              child: Text('Não foi possível carregar o supermercado.'),
+            );
           }
 
           final market = snapshot.data!;

@@ -17,7 +17,7 @@ class AuthApi {
     });
 
     if (response.statusCode != 201) {
-      throw StateError('Invalid email or password.');
+      throw StateError('E-mail ou senha inválidos.');
     }
 
     return (jsonDecode(response.body) as Map<String, dynamic>)['accessToken']

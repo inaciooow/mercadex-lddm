@@ -37,7 +37,9 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
           }
 
           if (snapshot.hasError) {
-            return const Center(child: Text('Não foi possível carregar as ofertas.'));
+            return const Center(
+              child: Text('Não foi possível carregar as ofertas.'),
+            );
           }
 
           final product = snapshot.data!;
@@ -76,7 +78,9 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                         packaging: product.packaging,
                       );
                   ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('${product.name} adicionado à lista.')),
+                    SnackBar(
+                      content: Text('${product.name} adicionado à lista.'),
+                    ),
                   );
                 },
                 icon: const Icon(Icons.add_shopping_cart_outlined),
