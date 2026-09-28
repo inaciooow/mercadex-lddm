@@ -3,10 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import { FavoritesModule } from './favorites/favorites.module';
+import { MarketsModule } from './markets/markets.module';
 import { ProductsModule } from './products/products.module';
 
 @Module({
-  imports: [AuthModule, FavoritesModule, ProductsModule],
+  imports: [AuthModule, FavoritesModule, MarketsModule, ProductsModule],
   controllers: [AppController],
   providers: [AppService],
 })

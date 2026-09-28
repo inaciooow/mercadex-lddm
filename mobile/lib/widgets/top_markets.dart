@@ -1,15 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mercadex/features/markets/data/markets_repository.dart';
+import 'package:mercadex/features/markets/domain/market.dart';
 
-class TopMarkets extends StatelessWidget {
+class TopMarkets extends StatefulWidget {
   const TopMarkets({super.key});
 
-  static const _markets = [
-    'FreshMart',
-    'Value Foods',
-    'Green Grocer',
-    'Daily Market',
-  ];
+  @override
+  State<TopMarkets> createState() => _TopMarketsState();
+}
+
+class _TopMarketsState extends State<TopMarkets> {
+  late final Future<List<Market>> _markets;
+
+  @override
+  void initState() {
+    super.initState();
+    _markets = const MarketsRepository().getMarkets();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,51 +26,70 @@ class TopMarkets extends StatelessWidget {
       children: [
         Text('Top markets', style: Theme.of(context).textTheme.titleLarge),
         const SizedBox(height: 12),
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: _markets.map((market) {
-              return Padding(
-                padding: const EdgeInsets.only(right: 16),
-                child: SizedBox(
-                  width: 72,
-                  child: InkWell(
-                    borderRadius: BorderRadius.circular(28),
-                    onTap: () => context.push(
-                      '/market/${market.toLowerCase().replaceAll(' ', '-')}',
-                    ),
-                    child: Column(
-                      children: [
-                        CircleAvatar(
-                          radius: 28,
-                          backgroundColor: Theme.of(
-                            context,
-                          ).colorScheme.primary,
-                          child: Text(
-                            market[0],
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 20,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
-                        ),
-                        const SizedBox(height: 8),
-                        Text(
-                          market,
-                          maxLines: 2,
-                          overflow: TextOverflow.ellipsis,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.bodySmall,
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+        FutureBuilder<List<Market>>(
+          future: _markets,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const SizedBox(
+                height: 84,
+                child: Center(child: CircularProgressIndicator()),
               );
-            }).toList(),
-          ),
+            }
+
+            if (snapshot.hasError) {
+              return const Text('Could not load markets.');
+            }
+
+            final markets = snapshot.data ?? [];
+            if (markets.isEmpty) {
+              return const Text('No markets available.');
+            }
+
+            return SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: markets.map((market) {
+                  return Padding(
+                    padding: const EdgeInsets.only(right: 16),
+                    child: SizedBox(
+                      width: 72,
+                      child: InkWell(
+                        borderRadius: BorderRadius.circular(28),
+                        onTap: () => context.push('/market/${market.id}'),
+                        child: Column(
+                          children: [
+                            CircleAvatar(
+                              radius: 28,
+                              backgroundColor: Theme.of(
+                                context,
+                              ).colorScheme.primary,
+                              child: Text(
+                                market.name[0],
+                                style: const TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+                            Text(
+                              market.name,
+                              maxLines: 2,
+                              overflow: TextOverflow.ellipsis,
+                              textAlign: TextAlign.center,
+                              style: Theme.of(context).textTheme.bodySmall,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+            );
+          },
         ),
       ],
     );

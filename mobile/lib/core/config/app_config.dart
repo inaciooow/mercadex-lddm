@@ -5,4 +5,6 @@ class AppConfig {
     'USE_MOCK_DATA',
     defaultValue: true,
   );
+
+  static const apiUrl = String.fromEnvironment('API_URL');
 }
