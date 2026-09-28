@@ -21,7 +21,7 @@ class ProductsRepository {
     ),
     SearchProduct(
       id: 'banana-organica-1kg',
-      name: 'Banana Orgânica',
+      name: 'Banana Organica',
       packaging: '1kg',
     ),
     SearchProduct(
@@ -30,12 +30,12 @@ class ProductsRepository {
       packaging: '2L',
     ),
     SearchProduct(id: 'arroz-5kg', name: 'Arroz Tipo 1', packaging: '5kg'),
-    SearchProduct(id: 'feijao-1kg', name: 'Feijão Carioca', packaging: '1kg'),
-    SearchProduct(id: 'cafe-500g', name: 'Café Tradicional', packaging: '500g'),
+    SearchProduct(id: 'feijao-1kg', name: 'Feijao Carioca', packaging: '1kg'),
+    SearchProduct(id: 'cafe-500g', name: 'Cafe Tradicional', packaging: '500g'),
     SearchProduct(id: 'leite-1l', name: 'Leite Integral', packaging: '1L'),
     SearchProduct(
       id: 'macarrao-500g',
-      name: 'Macarrão Espaguete',
+      name: 'Macarrao Espaguete',
       packaging: '500g',
     ),
     SearchProduct(
@@ -49,6 +49,60 @@ class ProductsRepository {
       name: 'Peito de Frango',
       packaging: '1kg',
     ),
+    SearchProduct(id: 'manteiga-200g', name: 'Manteiga', packaging: '200g'),
+    SearchProduct(id: 'agua-1-5l', name: 'Agua Mineral', packaging: '1,5L'),
+    SearchProduct(
+      id: 'iogurte-natural-170g',
+      name: 'Iogurte Natural',
+      packaging: '170g',
+    ),
+    SearchProduct(
+      id: 'mussarela-200g',
+      name: 'Queijo Mussarela',
+      packaging: '200g',
+    ),
+    SearchProduct(
+      id: 'farinha-trigo-1kg',
+      name: 'Farinha de Trigo',
+      packaging: '1kg',
+    ),
+    SearchProduct(id: 'aveia-170g', name: 'Aveia', packaging: '170g'),
+    SearchProduct(id: 'acucar-1kg', name: 'Acucar', packaging: '1kg'),
+    SearchProduct(id: 'sal-1kg', name: 'Sal', packaging: '1kg'),
+    SearchProduct(
+      id: 'oleo-soja-900ml',
+      name: 'Oleo de Soja',
+      packaging: '900ml',
+    ),
+    SearchProduct(
+      id: 'milho-lata-170g',
+      name: 'Milho em Lata',
+      packaging: '170g',
+    ),
+    SearchProduct(
+      id: 'ervilha-lata-170g',
+      name: 'Ervilha em Lata',
+      packaging: '170g',
+    ),
+    SearchProduct(id: 'atum-lata-170g', name: 'Atum', packaging: '170g'),
+    SearchProduct(
+      id: 'sardinha-lata-125g',
+      name: 'Sardinha',
+      packaging: '125g',
+    ),
+    SearchProduct(id: 'maca-gala-1kg', name: 'Maca', packaging: '1kg'),
+    SearchProduct(id: 'laranja-pera-1kg', name: 'Laranja', packaging: '1kg'),
+    SearchProduct(id: 'batata-1kg', name: 'Batata', packaging: '1kg'),
+    SearchProduct(id: 'cebola-1kg', name: 'Cebola', packaging: '1kg'),
+    SearchProduct(id: 'cenoura-1kg', name: 'Cenoura', packaging: '1kg'),
+    SearchProduct(id: 'alface-un', name: 'Alface', packaging: 'unidade'),
+    SearchProduct(
+      id: 'pao-forma-500g',
+      name: 'Pao de Forma',
+      packaging: '500g',
+    ),
+    SearchProduct(id: 'ovos-12un', name: 'Ovos', packaging: '12 unidades'),
+    SearchProduct(id: 'carne-moida-1kg', name: 'Carne Moida', packaging: '1kg'),
   ];
 
   static const _mockProducts = [
@@ -96,7 +150,7 @@ class ProductsRepository {
     ),
     ProductDeals(
       id: 'banana-organica-1kg',
-      name: 'Banana Orgânica',
+      name: 'Banana Organica',
       packaging: '1kg',
       deals: [
         ProductMarketDeal(

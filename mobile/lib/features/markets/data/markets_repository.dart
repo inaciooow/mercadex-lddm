@@ -37,7 +37,7 @@ class MarketsRepository {
     'green-grocer': [
       MarketProduct(
         id: 'banana-organica-1kg',
-        name: 'Banana Orgânica',
+        name: 'Banana Organica',
         packaging: '1kg',
       ),
     ],
