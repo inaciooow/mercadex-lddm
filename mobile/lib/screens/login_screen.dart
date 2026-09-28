@@ -71,7 +71,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
         padding: const EdgeInsets.all(16),
         children: [
           Text(
-            'Boas-vindas de volta',
+            'Acesse sua conta',
             style: Theme.of(context).textTheme.headlineSmall,
           ),
           const SizedBox(height: 8),
