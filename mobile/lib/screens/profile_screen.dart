@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:mercadex/widgets/app_top_bar.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -11,16 +12,27 @@ class ProfileScreen extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          ListTile(
-            leading: const Icon(Icons.info_outline),
-            title: const Text('About Mercadex'),
-            trailing: const Icon(Icons.chevron_right),
-            onTap: () {
-              showModalBottomSheet<void>(
-                context: context,
-                builder: (context) => const AboutSheet(),
-              );
-            },
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.login),
+              title: const Text('Log in'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () => context.push('/login'),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Card(
+            child: ListTile(
+              leading: const Icon(Icons.info_outline),
+              title: const Text('About Mercadex'),
+              trailing: const Icon(Icons.chevron_right),
+              onTap: () {
+                showModalBottomSheet<void>(
+                  context: context,
+                  builder: (context) => const AboutSheet(),
+                );
+              },
+            ),
           ),
         ],
       ),

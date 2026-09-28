@@ -22,6 +22,57 @@ type ProductSeed = {
   category: string;
 };
 
+const marketSeeds = [
+  {
+    id: 'freshmart',
+    name: 'FreshMart',
+    branch: {
+      id: 'freshmart-central',
+      name: 'FreshMart Central',
+      unitLabel: 'Central',
+      address: '100 Market Street',
+      latitude: -23.55052,
+      longitude: -46.633308,
+    },
+  },
+  {
+    id: 'value-foods',
+    name: 'Value Foods',
+    branch: {
+      id: 'value-foods-central',
+      name: 'Value Foods Central',
+      unitLabel: 'Central',
+      address: '200 Market Street',
+      latitude: -23.55252,
+      longitude: -46.635308,
+    },
+  },
+  {
+    id: 'green-grocer',
+    name: 'Green Grocer',
+    branch: {
+      id: 'green-grocer-central',
+      name: 'Green Grocer Central',
+      unitLabel: 'Central',
+      address: '300 Market Street',
+      latitude: -23.55452,
+      longitude: -46.637308,
+    },
+  },
+  {
+    id: 'daily-market',
+    name: 'Daily Market',
+    branch: {
+      id: 'daily-market-central',
+      name: 'Daily Market Central',
+      unitLabel: 'Central',
+      address: '400 Market Street',
+      latitude: -23.55652,
+      longitude: -46.639308,
+    },
+  },
+];
+
 async function main() {
   const products: ProductSeed[] = JSON.parse(
     await readFile(join(__dirname, 'seed', 'products.json'), 'utf8'),
@@ -32,6 +83,35 @@ async function main() {
       where: { id: product.id },
       update: product,
       create: product,
+    });
+  }
+
+  for (const market of marketSeeds) {
+    await prisma.market.upsert({
+      where: { id: market.id },
+      update: { name: market.name },
+      create: { id: market.id, name: market.name },
+    });
+
+    await prisma.marketBranch.upsert({
+      where: { id: market.branch.id },
+      update: {
+        marketId: market.id,
+        name: market.branch.name,
+        unitLabel: market.branch.unitLabel,
+        address: market.branch.address,
+        latitude: market.branch.latitude,
+        longitude: market.branch.longitude,
+      },
+      create: {
+        id: market.branch.id,
+        marketId: market.id,
+        name: market.branch.name,
+        unitLabel: market.branch.unitLabel,
+        address: market.branch.address,
+        latitude: market.branch.latitude,
+        longitude: market.branch.longitude,
+      },
     });
   }
 
