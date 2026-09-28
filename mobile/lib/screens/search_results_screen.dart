@@ -30,7 +30,9 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
       return;
     }
 
-    setState(() => _deals = _loadDeals());
+    setState(() {
+      _deals = _loadDeals();
+    });
   }
 
   Future<List<SearchDeal>> _loadDeals() {
@@ -117,6 +119,7 @@ class _SearchResultsScreenState extends State<SearchResultsScreen> {
                         branch: deal.branchName,
                         price: deal.price,
                         packaging: deal.packaging,
+                        onTap: () => context.push('/product/${deal.productId}'),
                       ),
                     ),
                   ),

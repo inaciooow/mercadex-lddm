@@ -3,6 +3,7 @@ import 'package:mercadex/screens/home_screen.dart';
 import 'package:mercadex/screens/login_screen.dart';
 import 'package:mercadex/screens/market_screen.dart';
 import 'package:mercadex/screens/profile_screen.dart';
+import 'package:mercadex/screens/product_screen.dart';
 import 'package:mercadex/screens/search_results_screen.dart';
 import 'package:mercadex/screens/to_be_implemented_screen.dart';
 import 'package:mercadex/widgets/app_bottom_navigation.dart';
@@ -44,6 +45,11 @@ final appRouter = GoRouter(
       path: '/search',
       builder: (context, state) =>
           SearchResultsScreen(query: state.uri.queryParameters['query'] ?? ''),
+    ),
+    GoRoute(
+      path: '/product/:productId',
+      builder: (context, state) =>
+          ProductScreen(productId: state.pathParameters['productId']!),
     ),
   ],
 );

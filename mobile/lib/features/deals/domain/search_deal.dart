@@ -1,6 +1,7 @@
 class SearchDeal {
   const SearchDeal({
     required this.id,
+    required this.productId,
     required this.productName,
     required this.packaging,
     required this.marketName,
@@ -9,6 +10,7 @@ class SearchDeal {
   });
 
   final String id;
+  final String productId;
   final String productName;
   final String packaging;
   final String marketName;
@@ -22,6 +24,7 @@ class SearchDeal {
 
     return SearchDeal(
       id: json['id'] as String,
+      productId: product['id'] as String,
       productName: product['name'] as String,
       packaging: product['packaging'] as String,
       marketName: market['name'] as String,

@@ -91,6 +91,22 @@ const priceObservationSeeds = [
     observedAt: new Date('2026-09-26T10:00:00Z'),
   },
   {
+    id: 'banana-prata-value-foods',
+    productId: 'banana-prata-1kg',
+    branchId: 'value-foods-central',
+    price: 4.19,
+    status: 'ACTIVE' as const,
+    observedAt: new Date('2026-09-26T12:00:00Z'),
+  },
+  {
+    id: 'banana-prata-daily-market',
+    productId: 'banana-prata-1kg',
+    branchId: 'daily-market-central',
+    price: 4.49,
+    status: 'ACTIVE' as const,
+    observedAt: new Date('2026-09-27T09:00:00Z'),
+  },
+  {
     id: 'banana-organica-green-grocer',
     productId: 'banana-organica-1kg',
     branchId: 'green-grocer-central',

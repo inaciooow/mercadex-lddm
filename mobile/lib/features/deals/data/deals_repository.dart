@@ -10,6 +10,7 @@ class DealsRepository {
   static const _mockDeals = [
     SearchDeal(
       id: 'banana-prata-freshmart',
+      productId: 'banana-prata-1kg',
       productName: 'Banana Prata',
       packaging: '1kg',
       marketName: 'FreshMart',
@@ -18,6 +19,7 @@ class DealsRepository {
     ),
     SearchDeal(
       id: 'banana-nanica-value-foods',
+      productId: 'banana-nanica-1kg',
       productName: 'Banana Nanica',
       packaging: '1kg',
       marketName: 'Value Foods',
@@ -26,6 +28,7 @@ class DealsRepository {
     ),
     SearchDeal(
       id: 'banana-organica-green-grocer',
+      productId: 'banana-organica-1kg',
       productName: 'Banana Orgânica',
       packaging: '1kg',
       marketName: 'Green Grocer',
