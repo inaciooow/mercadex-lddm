@@ -105,6 +105,13 @@ class _ProductScreenState extends ConsumerState<ProductScreen> {
                   ),
                 ),
               ),
+              const SizedBox(height: 12),
+              OutlinedButton.icon(
+                onPressed: () =>
+                    context.push('/product/${product.id}/informar-preco'),
+                icon: const Icon(Icons.sell_outlined),
+                label: const Text('Informar preço'),
+              ),
             ],
           );
         },

@@ -6,6 +6,7 @@ import 'package:mercadex/screens/profile_screen.dart';
 import 'package:mercadex/screens/product_screen.dart';
 import 'package:mercadex/screens/search_results_screen.dart';
 import 'package:mercadex/screens/shopping_list_screen.dart';
+import 'package:mercadex/screens/submit_price_screen.dart';
 import 'package:mercadex/screens/to_be_implemented_screen.dart';
 import 'package:mercadex/widgets/app_bottom_navigation.dart';
 
@@ -59,6 +60,11 @@ final appRouter = GoRouter(
       path: '/product/:productId',
       builder: (context, state) =>
           ProductScreen(productId: state.pathParameters['productId']!),
+    ),
+    GoRoute(
+      path: '/product/:productId/informar-preco',
+      builder: (context, state) =>
+          SubmitPriceScreen(productId: state.pathParameters['productId']!),
     ),
   ],
 );

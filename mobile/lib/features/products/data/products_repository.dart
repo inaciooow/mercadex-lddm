@@ -179,7 +179,52 @@ class ProductsRepository {
     );
   }
 
-  Future<ProductDeals> getProductDeals(String productId) {
+  static const _mockMarkets = [
+    (id: 'freshmart', name: 'Carrefour', markup: 40),
+    (id: 'value-foods', name: 'Pão de Açúcar', markup: 130),
+    (id: 'green-grocer', name: 'Assaí Atacadista', markup: 0),
+    (id: 'daily-market', name: 'Atacadão', markup: 20),
+  ];
+
+  // Prices in centavos keep generated mock values exact.
+  static const _basePrices = {
+    'banana-prata-1kg': 399,
+    'banana-nanica-1kg': 429,
+    'banana-organica-1kg': 599,
+    'coke-2l': 899,
+    'arroz-5kg': 2999,
+    'feijao-1kg': 849,
+    'cafe-500g': 1899,
+    'leite-1l': 549,
+    'macarrao-500g': 599,
+    'molho-tomate-300g': 349,
+    'tomate-1kg': 899,
+    'peito-frango-1kg': 1899,
+    'manteiga-200g': 1299,
+    'agua-1-5l': 349,
+    'iogurte-natural-170g': 329,
+    'mussarela-200g': 1499,
+    'farinha-trigo-1kg': 629,
+    'aveia-170g': 899,
+    'acucar-1kg': 499,
+    'sal-1kg': 249,
+    'oleo-soja-900ml': 899,
+    'milho-lata-170g': 429,
+    'ervilha-lata-170g': 429,
+    'atum-lata-170g': 999,
+    'sardinha-lata-125g': 699,
+    'maca-gala-1kg': 1099,
+    'laranja-pera-1kg': 599,
+    'batata-1kg': 549,
+    'cebola-1kg': 499,
+    'cenoura-1kg': 599,
+    'alface-un': 399,
+    'pao-forma-500g': 999,
+    'ovos-12un': 1299,
+    'carne-moida-1kg': 3499,
+  };
+
+  Future<ProductDeals> getProductDeals(String productId) async {
     if (!AppConfig.useMockData) {
       return api.getProductDeals(productId);
     }
@@ -187,27 +232,30 @@ class ProductsRepository {
     final existingProduct = _mockProducts
         .where((product) => product.id == productId)
         .firstOrNull;
-    if (existingProduct != null) {
-      return Future.value(existingProduct);
-    }
-
     final product = mockSearchProducts
         .where((product) => product.id == productId)
         .first;
+    final deals = [
+      for (final market in _mockMarkets)
+        existingProduct?.deals
+                .where((deal) => deal.marketId == market.id)
+                .firstOrNull ??
+            ProductMarketDeal(
+              id: '${product.id}-${market.id}',
+              marketId: market.id,
+              marketName: market.name,
+              branchName: '${market.name} Central',
+              price: ((_basePrices[product.id]! + market.markup) / 100)
+                  .toStringAsFixed(2),
+            ),
+    ]..sort((a, b) => double.parse(a.price).compareTo(double.parse(b.price)));
+
     return Future.value(
       ProductDeals(
         id: product.id,
         name: product.name,
         packaging: product.packaging,
-        deals: [
-          ProductMarketDeal(
-            id: '${product.id}-carrefour',
-            marketId: 'freshmart',
-            marketName: 'Carrefour',
-            branchName: 'Carrefour Central',
-            price: '9.99',
-          ),
-        ],
+        deals: deals,
       ),
     );
   }
