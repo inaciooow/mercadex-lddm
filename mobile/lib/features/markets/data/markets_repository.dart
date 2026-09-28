@@ -21,4 +21,25 @@ class MarketsRepository {
 
     return api.getMarkets();
   }
+
+  Future<MarketDetail> getMarket(String marketId) {
+    if (!AppConfig.useMockData) {
+      return api.getMarket(marketId);
+    }
+
+    final market = _mockMarkets.where((market) => market.id == marketId).first;
+    return Future.value(
+      MarketDetail(
+        id: market.id,
+        name: market.name,
+        branches: [
+          MarketBranch(
+            id: '${market.id}-central',
+            name: '${market.name} Central',
+            address: 'Market Street',
+          ),
+        ],
+      ),
+    );
+  }
 }

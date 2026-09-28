@@ -20,4 +20,16 @@ class MarketsApi {
         .map((item) => Market.fromJson(item as Map<String, dynamic>))
         .toList();
   }
+
+  Future<MarketDetail> getMarket(String marketId) async {
+    final response = await client.get('/markets/$marketId');
+
+    if (response.statusCode != 200) {
+      throw StateError('Could not load market.');
+    }
+
+    return MarketDetail.fromJson(
+      jsonDecode(response.body) as Map<String, dynamic>,
+    );
+  }
 }

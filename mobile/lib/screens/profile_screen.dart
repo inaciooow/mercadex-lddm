@@ -1,25 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
+import 'package:mercadex/features/auth/presentation/auth_session_provider.dart';
 import 'package:mercadex/widgets/app_top_bar.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final session = ref.watch(authSessionProvider);
+
     return Scaffold(
       appBar: const AppTopBar(title: 'Profile'),
       body: ListView(
         padding: const EdgeInsets.all(16),
         children: [
-          Card(
-            child: ListTile(
-              leading: const Icon(Icons.login),
-              title: const Text('Log in'),
-              trailing: const Icon(Icons.chevron_right),
-              onTap: () => context.push('/login'),
+          if (session == null)
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.login),
+                title: const Text('Log in'),
+                trailing: const Icon(Icons.chevron_right),
+                onTap: () => context.push('/login'),
+              ),
+            )
+          else ...[
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.person_outline),
+                title: Text(session.email),
+                subtitle: const Text('Logged in'),
+              ),
             ),
-          ),
+            const SizedBox(height: 8),
+            Card(
+              child: ListTile(
+                leading: const Icon(Icons.logout),
+                title: const Text('Log out'),
+                onTap: () => ref.read(authSessionProvider.notifier).logOut(),
+              ),
+            ),
+          ],
           const SizedBox(height: 8),
           Card(
             child: ListTile(

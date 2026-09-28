@@ -1,6 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:mercadex/screens/home_screen.dart';
 import 'package:mercadex/screens/login_screen.dart';
+import 'package:mercadex/screens/market_screen.dart';
 import 'package:mercadex/screens/profile_screen.dart';
 import 'package:mercadex/screens/search_results_screen.dart';
 import 'package:mercadex/screens/to_be_implemented_screen.dart';
@@ -36,7 +37,8 @@ final appRouter = GoRouter(
     ),
     GoRoute(
       path: '/market/:marketId',
-      builder: (context, state) => const ToBeImplementedScreen(title: 'Market'),
+      builder: (context, state) =>
+          MarketScreen(marketId: state.pathParameters['marketId']!),
     ),
     GoRoute(
       path: '/search',

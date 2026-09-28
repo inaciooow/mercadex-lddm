@@ -73,6 +73,33 @@ const marketSeeds = [
   },
 ];
 
+const priceObservationSeeds = [
+  {
+    id: 'banana-prata-freshmart',
+    productId: 'banana-prata-1kg',
+    branchId: 'freshmart-central',
+    price: 3.99,
+    status: 'ACTIVE' as const,
+    observedAt: new Date('2026-09-25T10:00:00Z'),
+  },
+  {
+    id: 'banana-nanica-value-foods',
+    productId: 'banana-nanica-1kg',
+    branchId: 'value-foods-central',
+    price: 4.29,
+    status: 'ACTIVE' as const,
+    observedAt: new Date('2026-09-26T10:00:00Z'),
+  },
+  {
+    id: 'banana-organica-green-grocer',
+    productId: 'banana-organica-1kg',
+    branchId: 'green-grocer-central',
+    price: 5.99,
+    status: 'ACTIVE' as const,
+    observedAt: new Date('2026-09-27T10:00:00Z'),
+  },
+];
+
 async function main() {
   const products: ProductSeed[] = JSON.parse(
     await readFile(join(__dirname, 'seed', 'products.json'), 'utf8'),
@@ -112,6 +139,20 @@ async function main() {
         latitude: market.branch.latitude,
         longitude: market.branch.longitude,
       },
+    });
+  }
+
+  for (const observation of priceObservationSeeds) {
+    await prisma.priceObservation.upsert({
+      where: { id: observation.id },
+      update: {
+        productId: observation.productId,
+        branchId: observation.branchId,
+        price: observation.price,
+        status: observation.status,
+        observedAt: observation.observedAt,
+      },
+      create: observation,
     });
   }
 

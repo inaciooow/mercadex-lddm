@@ -33,5 +33,26 @@
     "brand": "Itambé",
     "packaging": "1L",
     "category": "Laticínios"
+  },
+  {
+    "id": "banana-prata-1kg",
+    "name": "Banana Prata",
+    "brand": "Hortifruti",
+    "packaging": "1kg",
+    "category": "Frutas"
+  },
+  {
+    "id": "banana-nanica-1kg",
+    "name": "Banana Nanica",
+    "brand": "Hortifruti",
+    "packaging": "1kg",
+    "category": "Frutas"
+  },
+  {
+    "id": "banana-organica-1kg",
+    "name": "Banana Orgânica",
+    "brand": "Hortifruti",
+    "packaging": "1kg",
+    "category": "Frutas"
   }
 ]
