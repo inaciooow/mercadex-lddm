@@ -18,3 +18,7 @@ The database seed creates this development-only account:
 Email: admin@mercadex.local
 Password: admin
 ```
+# To-DO
+
+- splash screen
+- change colors
