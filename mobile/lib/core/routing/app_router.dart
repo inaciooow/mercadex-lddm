@@ -1,21 +1,21 @@
 import 'package:go_router/go_router.dart';
-import 'package:mercadex/screens/comparison_screen.dart';
-import 'package:mercadex/screens/home_screen.dart';
-import 'package:mercadex/screens/login_screen.dart';
-import 'package:mercadex/screens/market_screen.dart';
-import 'package:mercadex/screens/profile_screen.dart';
-import 'package:mercadex/screens/product_screen.dart';
-import 'package:mercadex/screens/search_results_screen.dart';
-import 'package:mercadex/screens/shopping_list_screen.dart';
-import 'package:mercadex/screens/submit_price_screen.dart';
-import 'package:mercadex/screens/scanner_screen.dart';
-import 'package:mercadex/widgets/app_bottom_navigation.dart';
+import 'package:mercadex/features/markets/presentation/pages/comparison_page.dart';
+import 'package:mercadex/features/home/presentation/pages/home_page.dart';
+import 'package:mercadex/features/auth/presentation/pages/login_page.dart';
+import 'package:mercadex/features/markets/presentation/pages/market_page.dart';
+import 'package:mercadex/features/profile/presentation/pages/profile_page.dart';
+import 'package:mercadex/features/products/presentation/pages/product_page.dart';
+import 'package:mercadex/features/products/presentation/pages/search_results_page.dart';
+import 'package:mercadex/features/shopping_list/presentation/pages/shopping_list_page.dart';
+import 'package:mercadex/features/prices/presentation/pages/submit_price_page.dart';
+import 'package:mercadex/features/scanner/presentation/pages/scanner_page.dart';
+import 'package:mercadex/core/widgets/app_bottom_navigation.dart';
 
 final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: '/compare',
-      builder: (context, state) => const ComparisonScreen(),
+      builder: (context, state) => const ComparisonPage(),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
@@ -24,14 +24,14 @@ final appRouter = GoRouter(
       branches: [
         StatefulShellBranch(
           routes: [
-            GoRoute(path: '/', builder: (context, state) => const HomeScreen()),
+            GoRoute(path: '/', builder: (context, state) => const HomePage()),
           ],
         ),
         StatefulShellBranch(
           routes: [
             GoRoute(
               path: '/shopping-list',
-              builder: (context, state) => const ShoppingListScreen(),
+              builder: (context, state) => const ShoppingListPage(),
             ),
           ],
         ),
@@ -39,33 +39,33 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: '/profile',
-              builder: (context, state) => const ProfileScreen(),
+              builder: (context, state) => const ProfilePage(),
             ),
           ],
         ),
       ],
     ),
-    GoRoute(path: '/login', builder: (context, state) => const LoginScreen()),
-    GoRoute(path: '/scan', builder: (context, state) => const ScannerScreen()),
+    GoRoute(path: '/login', builder: (context, state) => const LoginPage()),
+    GoRoute(path: '/scan', builder: (context, state) => const ScannerPage()),
     GoRoute(
       path: '/market/:marketId',
       builder: (context, state) =>
-          MarketScreen(marketId: state.pathParameters['marketId']!),
+          MarketPage(marketId: state.pathParameters['marketId']!),
     ),
     GoRoute(
       path: '/search',
       builder: (context, state) =>
-          SearchResultsScreen(query: state.uri.queryParameters['query'] ?? ''),
+          SearchResultsPage(query: state.uri.queryParameters['query'] ?? ''),
     ),
     GoRoute(
       path: '/product/:productId',
       builder: (context, state) =>
-          ProductScreen(productId: state.pathParameters['productId']!),
+          ProductPage(productId: state.pathParameters['productId']!),
     ),
     GoRoute(
       path: '/product/:productId/informar-preco',
       builder: (context, state) =>
-          SubmitPriceScreen(productId: state.pathParameters['productId']!),
+          SubmitPricePage(productId: state.pathParameters['productId']!),
     ),
   ],
 );

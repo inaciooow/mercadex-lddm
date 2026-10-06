@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mercadex/features/shopping_list/presentation/shopping_list_provider.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
-import 'package:mercadex/widgets/product_avatar.dart';
+import 'package:mercadex/features/shopping_list/presentation/providers/shopping_list_provider.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
+import 'package:mercadex/core/widgets/product_avatar.dart';
 import 'package:mercadex/core/theme/app_colors.dart';
 
-class ShoppingListScreen extends ConsumerWidget {
-  const ShoppingListScreen({super.key});
+class ShoppingListPage extends ConsumerWidget {
+  const ShoppingListPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

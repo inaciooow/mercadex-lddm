@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mercadex/core/theme/app_colors.dart';
-import 'package:mercadex/features/markets/presentation/market_comparison_provider.dart';
-import 'package:mercadex/features/shopping_list/presentation/shopping_list_provider.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/features/markets/presentation/providers/market_comparison_provider.dart';
+import 'package:mercadex/features/shopping_list/presentation/providers/shopping_list_provider.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
 
-class ComparisonScreen extends ConsumerWidget {
-  const ComparisonScreen({super.key});
+class ComparisonPage extends ConsumerWidget {
+  const ComparisonPage({super.key});
 
   String _brl(int cents) =>
       'R\$ ${(cents / 100).toStringAsFixed(2).replaceAll('.', ',')}';

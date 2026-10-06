@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/markets/data/markets_repository.dart';
 import 'package:mercadex/features/markets/domain/market.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
-import 'package:mercadex/widgets/product_search_card.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
+import 'package:mercadex/features/products/presentation/widgets/product_search_card.dart';
 
-class MarketScreen extends StatefulWidget {
-  const MarketScreen({super.key, required this.marketId});
+class MarketPage extends StatefulWidget {
+  const MarketPage({super.key, required this.marketId});
 
   final String marketId;
 
   @override
-  State<MarketScreen> createState() => _MarketScreenState();
+  State<MarketPage> createState() => _MarketPageState();
 }
 
-class _MarketScreenState extends State<MarketScreen> {
+class _MarketPageState extends State<MarketPage> {
   late final Future<MarketDetail> _market;
 
   @override

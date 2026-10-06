@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mercadex/features/home/presentation/home_products_provider.dart';
+import 'package:mercadex/features/home/presentation/providers/home_products_provider.dart';
 import 'package:mercadex/features/products/data/products_repository.dart';
 import 'package:mercadex/features/products/domain/search_product.dart';
-import 'package:mercadex/widgets/app_search_field.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
-import 'package:mercadex/widgets/product_search_card.dart';
+import 'package:mercadex/core/widgets/app_search_field.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
+import 'package:mercadex/features/products/presentation/widgets/product_search_card.dart';
 
-class SearchResultsScreen extends ConsumerStatefulWidget {
-  const SearchResultsScreen({super.key, required this.query});
+class SearchResultsPage extends ConsumerStatefulWidget {
+  const SearchResultsPage({super.key, required this.query});
 
   final String query;
 
   @override
-  ConsumerState<SearchResultsScreen> createState() =>
-      _SearchResultsScreenState();
+  ConsumerState<SearchResultsPage> createState() => _SearchResultsPageState();
 }
 
-class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
+class _SearchResultsPageState extends ConsumerState<SearchResultsPage> {
   late Future<List<SearchProduct>> _products;
 
   @override
@@ -28,7 +27,7 @@ class _SearchResultsScreenState extends ConsumerState<SearchResultsScreen> {
   }
 
   @override
-  void didUpdateWidget(covariant SearchResultsScreen oldWidget) {
+  void didUpdateWidget(covariant SearchResultsPage oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (oldWidget.query == widget.query) {
       return;

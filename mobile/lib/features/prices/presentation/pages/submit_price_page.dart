@@ -4,18 +4,18 @@ import 'package:mercadex/features/markets/data/markets_repository.dart';
 import 'package:mercadex/features/markets/domain/market.dart';
 import 'package:mercadex/features/products/data/products_repository.dart';
 import 'package:mercadex/features/products/domain/product_deals.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
 
-class SubmitPriceScreen extends StatefulWidget {
-  const SubmitPriceScreen({super.key, required this.productId});
+class SubmitPricePage extends StatefulWidget {
+  const SubmitPricePage({super.key, required this.productId});
 
   final String productId;
 
   @override
-  State<SubmitPriceScreen> createState() => _SubmitPriceScreenState();
+  State<SubmitPricePage> createState() => _SubmitPricePageState();
 }
 
-class _SubmitPriceScreenState extends State<SubmitPriceScreen> {
+class _SubmitPricePageState extends State<SubmitPricePage> {
   final _formKey = GlobalKey<FormState>();
   late final Future<({ProductDeals product, List<MarketDetail> markets})> _data;
   MarketDetail? _market;

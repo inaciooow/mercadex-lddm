@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
-import 'package:mercadex/features/auth/presentation/auth_session_provider.dart';
+import 'package:mercadex/features/auth/presentation/providers/auth_session_provider.dart';
 
 class AppBottomNavigation extends ConsumerWidget {
   const AppBottomNavigation({super.key, required this.navigationShell});

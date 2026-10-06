@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/auth/data/auth_repository.dart';
-import 'package:mercadex/features/auth/presentation/auth_session_provider.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
-import 'package:mercadex/widgets/app_notification.dart';
+import 'package:mercadex/features/auth/presentation/providers/auth_session_provider.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
+import 'package:mercadex/core/widgets/app_notification.dart';
 
-class LoginScreen extends ConsumerStatefulWidget {
-  const LoginScreen({super.key});
+class LoginPage extends ConsumerStatefulWidget {
+  const LoginPage({super.key});
 
   @override
-  ConsumerState<LoginScreen> createState() => _LoginScreenState();
+  ConsumerState<LoginPage> createState() => _LoginPageState();
 }
 
-class _LoginScreenState extends ConsumerState<LoginScreen> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   var _isSubmitting = false;

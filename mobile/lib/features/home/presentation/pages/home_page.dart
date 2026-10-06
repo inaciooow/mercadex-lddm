@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-import 'package:mercadex/features/home/presentation/home_products_provider.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
-import 'package:mercadex/widgets/app_search_field.dart';
-import 'package:mercadex/widgets/ad_banner.dart';
-import 'package:mercadex/widgets/home_product_section.dart';
-import 'package:mercadex/widgets/top_markets.dart';
+import 'package:mercadex/features/home/presentation/providers/home_products_provider.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
+import 'package:mercadex/core/widgets/app_search_field.dart';
+import 'package:mercadex/features/home/presentation/widgets/ad_banner.dart';
+import 'package:mercadex/features/home/presentation/widgets/home_product_section.dart';
+import 'package:mercadex/features/home/presentation/widgets/top_markets.dart';
 
-class HomeScreen extends ConsumerWidget {
-  const HomeScreen({super.key});
+class HomePage extends ConsumerWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
