@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mercadex/core/theme/app_colors.dart';
-import 'package:mercadex/widgets/product_avatar.dart';
+import 'package:mercadex/core/widgets/product_avatar.dart';
 
 class DealCard extends StatelessWidget {
   const DealCard({

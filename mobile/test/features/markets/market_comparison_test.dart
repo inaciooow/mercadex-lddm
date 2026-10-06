@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mercadex/features/markets/presentation/market_comparison_provider.dart';
-import 'package:mercadex/features/shopping_list/presentation/shopping_list_provider.dart';
+import 'package:mercadex/features/markets/presentation/providers/market_comparison_provider.dart';
+import 'package:mercadex/features/shopping_list/presentation/providers/shopping_list_provider.dart';
 
 void main() {
   test(

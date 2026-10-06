@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mercadex/features/markets/domain/market_comparison.dart';
 import 'package:mercadex/features/products/data/products_repository.dart';
-import 'package:mercadex/features/shopping_list/presentation/shopping_list_provider.dart';
+import 'package:mercadex/features/shopping_list/presentation/providers/shopping_list_provider.dart';
 
 final marketComparisonProvider = FutureProvider<List<MarketComparison>>((
   ref,

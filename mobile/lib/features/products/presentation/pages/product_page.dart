@@ -3,21 +3,21 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:mercadex/features/products/data/products_repository.dart';
 import 'package:mercadex/features/products/domain/product_deals.dart';
-import 'package:mercadex/features/shopping_list/presentation/shopping_list_provider.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
-import 'package:mercadex/widgets/app_notification.dart';
-import 'package:mercadex/widgets/deal_card.dart';
+import 'package:mercadex/features/shopping_list/presentation/providers/shopping_list_provider.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
+import 'package:mercadex/core/widgets/app_notification.dart';
+import 'package:mercadex/features/products/presentation/widgets/deal_card.dart';
 
-class ProductScreen extends ConsumerStatefulWidget {
-  const ProductScreen({super.key, required this.productId});
+class ProductPage extends ConsumerStatefulWidget {
+  const ProductPage({super.key, required this.productId});
 
   final String productId;
 
   @override
-  ConsumerState<ProductScreen> createState() => _ProductScreenState();
+  ConsumerState<ProductPage> createState() => _ProductPageState();
 }
 
-class _ProductScreenState extends ConsumerState<ProductScreen> {
+class _ProductPageState extends ConsumerState<ProductPage> {
   late final Future<ProductDeals> _product;
 
   @override

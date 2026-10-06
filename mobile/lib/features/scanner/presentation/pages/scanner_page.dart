@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mercadex/core/theme/app_colors.dart';
-import 'package:mercadex/widgets/app_top_bar.dart';
+import 'package:mercadex/core/widgets/app_top_bar.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
-class ScannerScreen extends StatefulWidget {
-  const ScannerScreen({super.key});
+class ScannerPage extends StatefulWidget {
+  const ScannerPage({super.key});
 
   @override
-  State<ScannerScreen> createState() => _ScannerScreenState();
+  State<ScannerPage> createState() => _ScannerPageState();
 }
 
-class _ScannerScreenState extends State<ScannerScreen> {
+class _ScannerPageState extends State<ScannerPage> {
   late final MobileScannerController _controller;
 
   @override
@@ -54,9 +54,7 @@ class _ScannerScreenState extends State<ScannerScreen> {
                     alignment: Alignment.center,
                     children: [
                       Positioned.fill(
-                        child: MobileScanner(
-                          controller: _controller,
-                        ),
+                        child: MobileScanner(controller: _controller),
                       ),
                       Positioned.fill(
                         child: ColoredBox(
